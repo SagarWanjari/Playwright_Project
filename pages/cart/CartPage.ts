@@ -3,18 +3,19 @@ import { Locator, Page } from "@playwright/test";
 
 export class Cartpage{
     readonly page: Page;
-    readonly btnAddToCart : Locator;
+    readonly btnCart : Locator;
     counter: number = 0;
     readonly cartItem: Locator;
     
     constructor(page:Page){
         this.page = page ;
-        this.btnAddToCart = this.page.locator('.shopping_cart_link');
+
         this.cartItem =  this.page.locator('.cart_item')
+        this.btnCart= this.page.locator('.shopping_cart_link');
     }
 
     async removeItem(productName: string){
-        await this.btnAddToCart.click();
+        await this.btnCart.click();
        const count = await this.cartItem .count();
        for(let i=0;i < count;i++){
           const item =  await this.page.locator('.cart_item').nth(i);
@@ -32,10 +33,10 @@ export class Cartpage{
 
     }
 
- async getCartItems(): Promise<string[]>{
-    await this.btnAddToCart.click();
+ async getCartItems(): Promise<string[]>{  
+   await this.btnCart.click();
     const productList: string[] = []; 
-    const count = await this.cartItem .count();
+    const count = await this.cartItem.count();
     for(let i=0;i < count;i++){
         
         const item = this.page.locator('.cart_item').nth(i);
