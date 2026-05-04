@@ -4,8 +4,8 @@ import { Cartpage } from "../pages/cart/CartPage";
 import { CheckoutPage } from "../pages/checkout/CheckoutPage";
 import { InventoryPage } from "../pages/inventory/InventoryPage";
 import { LoginPage } from "../pages/login/LoginPage"
-import { test as base} from '@playwright/test'
-
+import { test as base, request as base2} from '@playwright/test'
+import { UserApiClient } from '../api/client/UserApiClient';
 
 type MyFixture ={
       loginPage: LoginPage;
@@ -14,6 +14,7 @@ type MyFixture ={
   cartPage: Cartpage;
   checkoutPage: CheckoutPage;
   productComponent: ProductComponent;
+  userApi: UserApiClient;
 };
 
 export const test = base.extend<MyFixture>({
@@ -37,4 +38,21 @@ export const test = base.extend<MyFixture>({
   productComponent: async ({ page }, use) => {
     await use(new ProductComponent(page));
   },
+
+  userApi: async ({}, use) => {
+
+    const apiContext = await base2.newContext({
+      baseURL: 'https://reqres.in',   // ✅ defined once
+      extraHTTPHeaders: {
+        'x-api-key': process.env.API_KEY || 'free_user_3DAoUZHOIvac6Vr3ebbrpxj90oe'
+      }
+    });
+
+    const userApi = new UserApiClient(apiContext);
+
+    await use(userApi);
+
+    await apiContext.dispose(); // cleanup
+  }
+
 });
