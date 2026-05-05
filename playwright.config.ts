@@ -22,7 +22,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: 2,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 3 : 3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html', { open: 'never' }]], 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -74,11 +74,12 @@ export default defineConfig({
 use: {
     baseURL: 'https://eventhub.rahulshettyacademy.com',
     browserName : 'chromium',
-    headless: process.env.CI ? true : false,
+    headless: process.env.CI ? true : true,
     viewport: process.env.CI ? { width: 1920, height: 1080 } : null,
   launchOptions: {
     args: process.env.CI ? [] : ['--start-maximized']
   },
+  
       trace: 'on-first-retry',
   video: 'retain-on-failure',
   screenshot: 'only-on-failure', //'on', //'off',
