@@ -4,7 +4,7 @@ import users from "../../test-data/users.json";
 import { Logger } from "../../Helper/logger";
 
 
-test.only('Test 1: Valid Login', async ({page, loginPage})=>{
+test('Test 1: Valid Login', async ({page, loginPage})=>{
     Logger.info('Starting login test');
     await loginPage.login(users.validUser.username,users.validUser.password);
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html')

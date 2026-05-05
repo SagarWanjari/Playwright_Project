@@ -8,7 +8,7 @@ test('add to cart',async({loginPage, productComponent})=>{
      await productComponent.addToCart(productName);
 })
 
-test.only('sort product',async({loginPage, inventoryPage})=>{
+test('sort product',async({loginPage, inventoryPage})=>{
     const sortProducts = 'Price (low to high)';
      await loginPage.login('standard_user','secret_sauce');
     const prodcutPrice =  await inventoryPage.sortProducts(sortProducts);
