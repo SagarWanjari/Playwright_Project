@@ -4,7 +4,7 @@ import { Cartpage } from "../pages/cart/CartPage";
 import { CheckoutPage } from "../pages/checkout/CheckoutPage";
 import { InventoryPage } from "../pages/inventory/InventoryPage";
 import { LoginPage } from "../pages/login/LoginPage"
-import { test as base, request as base2} from '@playwright/test'
+import { test as base, request} from '@playwright/test'
 import { UserApiClient } from '../api/client/UserApiClient';
 
 type MyFixture ={
@@ -40,11 +40,13 @@ export const test = base.extend<MyFixture>({
   },
 
   userApi: async ({}, use) => {
-
-    const apiContext = await base2.newContext({
-      baseURL: 'https://reqres.in',   // ✅ defined once
+    if (!process.env.API_KEY || !process.env.BASE_URL) {
+  throw new Error("Missing environment variables");
+  }
+    const apiContext = await request.newContext({
+      baseURL: process.env.BASE_URL,   // ✅ defined once
       extraHTTPHeaders: {
-        'x-api-key': process.env.API_KEY || 'free_user_3DAoUZHOIvac6Vr3ebbrpxj90oe'
+        'x-api-key': process.env.API_KEY!
       }
     });
 
@@ -54,5 +56,5 @@ export const test = base.extend<MyFixture>({
 
     await apiContext.dispose(); // cleanup
   }
-  
+
 });

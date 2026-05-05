@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from '../../fixtures/pageFixtures'
 
-test.only('API Flow', async ({userApi})=> {
+test('API Flow', async ({userApi})=> {
 let id :number;
 
 test.step('GETv User', async ({})=> {
@@ -71,7 +71,6 @@ const response = await userApi.getUsersByID(9999);
   const response = await userApi.createUser({} as any);
   expect(await response.status()).toBe(201);
    const body = await response.json();
-  console.log(body);
  })
 
  test('Invalid User Endpoint',async ({request})=>{
