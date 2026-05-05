@@ -1,11 +1,11 @@
 import { expect } from "@playwright/test";
 import { test } from '../../fixtures/pageFixtures'
 
-test.describe.configure({ mode: 'serial' });
+test('API Flow', async ({userApi})=> {
 
 let id :number;
 
-test('GET Users ', async ({userApi})=> {
+await test.step('GET Users ', async ({})=> {
 const response = await userApi.getUsers(2);
 
   expect(response.status()).toBe(200);
@@ -16,7 +16,7 @@ const response = await userApi.getUsers(2);
 
 })
 
-test("POST Users", async ({userApi})=>{
+await test.step("POST Users", async ({})=>{
 
  const response =  await userApi.createUser({ name: 'Sagar', job: 'QA' });
 
@@ -27,7 +27,7 @@ test("POST Users", async ({userApi})=>{
   expect(body.name).toBe('Sagar');
 })
 
-test('Update user', async ({userApi})=>{
+await test.step('Update user', async ({})=>{
    const response = await userApi.updateUser(id, {name:'Sagar',job:'AI ENgineer'}) 
    expect (response.status()).toBe(200);
    const body = await response.json();
@@ -35,7 +35,8 @@ test('Update user', async ({userApi})=>{
    expect(body.name).toBe('Sagar');
 })
 
-test('Delete user', async ({userApi})=>{
+await test.step('Delete user', async ({})=>{
    const response = await userApi.deleteUser(id) ;
    expect (response.status()).toBe(204);
 })
+});
