@@ -1,10 +1,10 @@
 import { expect } from "@playwright/test";
 import { test } from '../../fixtures/pageFixtures'
 
-test('API Flow', async ({userApi})=> {
+test('API Flow @API', async ({userApi})=> {
 let id :number;
 
-test.step('GETv User', async ({})=> {
+await test.step('GET User', async ({})=> {
    const response = await userApi.getUsers(2);
   expect(response.status()).toBe(200);
   const body = await response.json();
@@ -56,7 +56,7 @@ await test.step('Delete user', async ({})=>{
 });
 
 
-test('invalid user id', async ({userApi})=> {
+test('invalid user id @API', async ({userApi})=> {
    
 const response = await userApi.getUsersByID(9999);
 
@@ -67,13 +67,13 @@ const response = await userApi.getUsersByID(9999);
 
 })
 
- test('Missing Payload',async ({userApi})=>{
+ test('Missing Payload @API' ,async ({userApi})=>{
   const response = await userApi.createUser({} as any);
   expect(await response.status()).toBe(201);
    const body = await response.json();
  })
 
- test('Invalid User Endpoint',async ({request})=>{
+ test('Invalid User Endpoint @API',async ({request})=>{
    
   const response = await request.get('https://reqres.in/data/ram');
   expect(await response.status()).toBe(404);

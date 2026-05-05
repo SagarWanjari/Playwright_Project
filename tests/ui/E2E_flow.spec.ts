@@ -3,7 +3,7 @@ import { expect } from '@playwright/test';
 import user from '../../test-data/users.json';
 import product from '../../test-data/products.json'
 
-test('E2E Purchase Flow', async ({loginPage,
+test('E2E Purchase Flow @UI', async ({loginPage,
   header,
   cartPage,
   checkoutPage,

@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import {test} from "../../fixtures/pageFixtures"
 
-test('Checkout Item',async({page, loginPage, header, productComponent, checkoutPage})=>{
+test('Checkout Item @UI',async({page, loginPage, header, productComponent, checkoutPage})=>{
     const productName1 = 'Sauce Labs Bike Light';
      await loginPage.goto();
      await loginPage.login('standard_user','secret_sauce');
