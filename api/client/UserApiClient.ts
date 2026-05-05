@@ -8,9 +8,13 @@ export class UserApiClient {
         this.request = request;
     }
     
-
     async getUsers(page : number = 2 ){
      const response =    await this.request.get(`/api/users?page=${page}`);
+    return response;         
+    }
+
+    async getUsersByID(id : number = 2 ){
+     const response =    await this.request.get(`/api/users/${id}`);
     return response;         
     }
 
@@ -36,4 +40,5 @@ export class UserApiClient {
 
     return response;
   }
+
 }
