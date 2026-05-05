@@ -74,11 +74,11 @@ export default defineConfig({
 use: {
     baseURL: 'https://eventhub.rahulshettyacademy.com',
     browserName : 'chromium',
-    headless : false,
-    viewport: null,                          // ← disables fixed viewport
-    launchOptions: {
-      args: ['--start-maximized']            // ← launches browser maximized
-    },
+    headless: process.env.CI ? true : false,
+    viewport: process.env.CI ? { width: 1920, height: 1080 } : null,
+  launchOptions: {
+    args: process.env.CI ? [] : ['--start-maximized']
+  },
       trace: 'on-first-retry',
   video: 'retain-on-failure',
   screenshot: 'only-on-failure', //'on', //'off',
