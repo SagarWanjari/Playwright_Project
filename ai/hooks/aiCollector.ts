@@ -51,5 +51,4 @@ export async function runAIBatchAnalysis() {
 
   fs.writeFileSync(failureFile, '', 'utf-8');
 
-  console.log("\nAI ANALYSIS COMPLETE");
 }
