@@ -1,5 +1,4 @@
-import { expect } from "@playwright/test";
-import {test} from "../../fixtures/pageFixtures"
+import { test , expect} from '../../fixtures/pageFixtures';
 
 test('Checkout Item @UI',async({page, loginPage, header, productComponent, checkoutPage})=>{
     const productName1 = 'Sauce Labs Bike Light';

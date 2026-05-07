@@ -1,5 +1,4 @@
-import { test } from '../../fixtures/pageFixtures';
-import { expect } from '@playwright/test';
+import { test , expect} from '../../fixtures/pageFixtures';
 import user from '../../test-data/users.json';
 import product from '../../test-data/products.json'
 

@@ -1,5 +1,4 @@
-import { expect } from "@playwright/test";
-import {test} from '../../fixtures/pageFixtures'
+import { test , expect} from '../../fixtures/pageFixtures';
 import users from "../../test-data/users.json";
 import { Logger } from "../../Helper/logger";
 

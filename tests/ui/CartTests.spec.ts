@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test';
-import { test } from '../../fixtures/pageFixtures';
+import { test , expect} from '../../fixtures/pageFixtures';
 import { products } from '../../test-data/products.json'
 
 test('Remove From Cart @UI',async({loginPage, productComponent, cartPage})=>{

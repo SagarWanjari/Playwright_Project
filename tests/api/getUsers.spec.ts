@@ -1,5 +1,4 @@
-import { expect } from "@playwright/test";
-import { test } from '../../fixtures/pageFixtures'
+import { test , expect} from '../../fixtures/pageFixtures';
 
 test('API Flow @API', async ({userApi})=> {
 let id :number;

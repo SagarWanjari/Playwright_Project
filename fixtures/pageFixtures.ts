@@ -4,8 +4,11 @@ import { Cartpage } from "../pages/cart/CartPage";
 import { CheckoutPage } from "../pages/checkout/CheckoutPage";
 import { InventoryPage } from "../pages/inventory/InventoryPage";
 import { LoginPage } from "../pages/login/LoginPage"
-import { test as base, request} from '@playwright/test'
+import { test as base, request, expect} from '@playwright/test'
 import { UserApiClient } from '../api/client/UserApiClient';
+import { collectFailure } from "../ai/hooks/aiCollector";
+
+export { expect };
 
 type MyFixture ={
       loginPage: LoginPage;
@@ -15,6 +18,7 @@ type MyFixture ={
   checkoutPage: CheckoutPage;
   productComponent: ProductComponent;
   userApi: UserApiClient;
+  failureCollector: void;
 };
 
 export const test = base.extend<MyFixture>({
@@ -55,6 +59,20 @@ export const test = base.extend<MyFixture>({
     await use(userApi);
 
     await apiContext.dispose(); // cleanup
+  },
+  failureCollector: [async ({}, use, testInfo) => {
+  await use();
+
+  if (testInfo.status === 'failed' || testInfo.status === 'timedOut') {
+    console.log("COLLECTING FAILURE");
+
+    collectFailure(testInfo);
+
   }
+}, { auto: true }]
 
 });
+
+
+
+

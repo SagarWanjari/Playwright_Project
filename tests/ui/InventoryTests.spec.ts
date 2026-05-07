@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test';
-import {test} from '../../fixtures/pageFixtures'
+import { test , expect} from '../../fixtures/pageFixtures';
 
 test('add to cart @UI',async({loginPage, productComponent})=>{
     const productName = 'Sauce Labs Bolt T-Shirt';
