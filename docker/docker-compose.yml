@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  playwright:
+
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+
+    container_name: playwright-framework
+
+    environment:
+      - TEST_ENV=CI
+
+    volumes:
+      - ../:/app
+
+    working_dir: /app
+
+    command: npx playwright test
