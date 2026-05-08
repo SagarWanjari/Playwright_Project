@@ -1,5 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 
+
 export class HeaderComponent{
     readonly btnAddToCart : Locator;
     page: Page;

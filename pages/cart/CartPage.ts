@@ -12,6 +12,7 @@ export class Cartpage{
 
         this.cartItem =  this.page.locator('.cart_item')
         this.btnCart= this.page.locator('.shopping_cart_link');
+        
     }
 
     async removeItem(productName: string){

@@ -2,7 +2,10 @@ import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 import { runAIBatchAnalysis } from './ai/hooks/aiCollector';
 
-dotenv.config();
+const envName = process.env.ENV || 'CI';
+dotenv.config({
+  path: `env/${envName}.env`
+});
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -15,18 +18,28 @@ dotenv.config();
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: './',
+  testMatch: [
+  '**/*.spec.ts'
+],
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 1 : 0,
+  retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 3 : undefined,
+  workers: process.env.CI ? 3 : 2,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['list'],['html'],['allure-playwright']],
+  reporter: [['list'],['html',{open:'never'}],['allure-playwright']],
   globalTeardown: require.resolve('./ai/globalTeardown'),
+  // projects: [
+
+  //   {
+  //       name: 'Advanced Framework',
+  //       grep: /@advanced/
+  //   }
+  // ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 
   /* Configure projects for major browsers */

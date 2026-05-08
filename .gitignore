@@ -1,10 +1,28 @@
 
-# Playwright
+# Node modules
 node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
+
+# Playwright
+playwright-report/
+test-results/
+
+# Allure
+allure-results/
+allure-report/
+
+# Logs
+logs/
+*.log
+
+# Environment
 .env
-.env.*
+env/*.env
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/
+
+# AI output
+advanced-failures.jsonl

@@ -1,2 +1,0 @@
-[INFO] 2026-05-08T07:34:49.514Z - Starting login test
-[INFO] 2026-05-08T07:34:50.334Z - User logged in successfully
